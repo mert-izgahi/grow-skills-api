@@ -1,0 +1,866 @@
+{
+	"info": {
+		"_postman_id": "33c95c3c-e8e1-41cd-87b5-8f9fa3a19a07",
+		"name": "Skill_Grow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32155276"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\":\"mert@mail.com\",\n  \"password\":\"Aa123456\",\n  \"name\":\"Mert\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/auth/register",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Set Environment Variable\", function () {",
+									"  pm.environment.set(\"token\", pm.response.json().data.token);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"mert@mail.com\",\n  \"password\": \"Aa123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/auth/login",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/auth/logout",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"mert@mail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/auth/forgot-password",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\":\"Bb123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/auth/reset-password/4f3e470c0231be9d5a936de6ddbfb51cf88542da",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"auth",
+								"reset-password",
+								"4f3e470c0231be9d5a936de6ddbfb51cf88542da"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\":\"Aa123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/auth/update-password",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"auth",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/auth/profile",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Mert",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/mert/Downloads/profile-10.webp",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/mert/Downloads/profile-12.webp",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{endPoint}}/auth/profile",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/users",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/users/65a60b803443a9ae665798b3",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"users",
+								"65a60b803443a9ae665798b3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/users/65a60b803443a9ae665798b3",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"users",
+								"65a60b803443a9ae665798b3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "courses",
+			"item": [
+				{
+					"name": "create-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Python level 1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "new course",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Dev",
+									"type": "text"
+								},
+								{
+									"key": "level",
+									"value": "Beginner",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/mert/Desktop/Screenshot 2024-01-17 at 16.55.17.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{endPoint}}/courses",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/courses",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/courses/65a99008f33374c5fc9ed1ee",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses",
+								"65a99008f33374c5fc9ed1ee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{endPoint}}/courses/65a96e09fc4fe28eb0ccea65",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses",
+								"65a96e09fc4fe28eb0ccea65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{endPoint}}/courses/65a98b848a62bdfc2752dc52",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses",
+								"65a98b848a62bdfc2752dc52"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "lessons",
+			"item": [
+				{
+					"name": "create-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\":\"Lesson 1\",\n  \"description\":\"Content\",\n  \"url\":\"test\",\n  \"duration\":5.30,\n  \"course\":\"65a99008f33374c5fc9ed1ee\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/lessons",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"lessons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/courses",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/courses/65a96e09fc4fe28eb0ccea65",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses",
+								"65a96e09fc4fe28eb0ccea65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{endPoint}}/courses/65a96e09fc4fe28eb0ccea65",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses",
+								"65a96e09fc4fe28eb0ccea65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{endPoint}}/lessons/65a98b848a62bdfc2752dc52",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"lessons",
+								"65a98b848a62bdfc2752dc52"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "enrollments",
+			"item": [
+				{
+					"name": "create-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"course\":\"65a99008f33374c5fc9ed1ee\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endPoint}}/enrollments",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"enrollments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/enrollments",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"enrollments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endPoint}}/courses/65a96e09fc4fe28eb0ccea65",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses",
+								"65a96e09fc4fe28eb0ccea65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{endPoint}}/courses/65a96e09fc4fe28eb0ccea65",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"courses",
+								"65a96e09fc4fe28eb0ccea65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{endPoint}}/enrollments/65a96e09fc4fe28eb0ccea65",
+							"host": [
+								"{{endPoint}}"
+							],
+							"path": [
+								"enrollments",
+								"65a96e09fc4fe28eb0ccea65"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
